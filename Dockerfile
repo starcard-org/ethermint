@@ -13,7 +13,7 @@ RUN apk add --update $PACKAGES
 COPY . .
 
 # Make the binary
-RUN make tools uild
+RUN make tools build
 
 # Final image
 FROM alpine
