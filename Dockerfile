@@ -26,5 +26,7 @@ WORKDIR /root
 COPY --from=build-env /go/src/github.com/chainsafe/ethermint/build/emintd /usr/bin/emintd
 COPY --from=build-env /go/src/github.com/chainsafe/ethermint/build/emintcli /usr/bin/emintcli
 
-# Run emintd by default
-CMD ["emintd"]
+# Make the default command a sleep infinity.  This way folks
+# can run the container, run any config steps they need
+# then run docker commit to change the launch to eminitd start
+CMD ["sleep infinity"]
