@@ -4,7 +4,7 @@ FROM golang:alpine AS build-env
 ENV PACKAGES make git curl build-base
 
 # Set working directory for the build
-WORKDIR /go/src/github.com/cosmos/ethermint
+WORKDIR /go/src/github.com/chainsafe/ethermint
 
 # Install dependencies
 RUN apk add --update $PACKAGES
@@ -13,7 +13,7 @@ RUN apk add --update $PACKAGES
 COPY . .
 
 # Make the binary
-RUN make tools deps build
+RUN make tools uild
 
 # Final image
 FROM alpine
@@ -23,7 +23,8 @@ RUN apk add --update ca-certificates
 WORKDIR /root
 
 # Copy over binaries from the build-env
-COPY --from=build-env /go/src/github.com/cosmos/ethermint/build/emintd /usr/bin/emintd
+COPY --from=build-env /go/src/github.com/chainsafe/ethermint/build/emintd /usr/bin/emintd
+COPY --from=build-env /go/src/github.com/chainsafe/ethermint/build/emintcli /usr/bin/emintcli
 
 # Run emintd by default
 CMD ["emintd"]
