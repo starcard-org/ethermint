@@ -29,4 +29,4 @@ COPY --from=build-env /go/src/github.com/chainsafe/ethermint/build/emintcli /usr
 # Make the default command a sleep infinity.  This way folks
 # can run the container, run any config steps they need
 # then run docker commit to change the launch to eminitd start
-CMD ["sleep infinity"]
+CMD ["/bin/sleep", "infinity"]
